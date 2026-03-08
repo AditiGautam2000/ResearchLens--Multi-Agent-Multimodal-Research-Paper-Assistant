@@ -1,0 +1,65 @@
+multi-agent-research-lab
+│
+├── backend
+│   ├── main.py
+│   │
+│   ├── api
+│   │   ├── query_routes.py
+│   │   ├── upload_routes.py
+│   │   └── health_routes.py
+│   │
+│   ├── agents
+│   │   ├── graph_builder.py
+│   │   ├── router_agent.py
+│   │   ├── retrieval_agent.py
+│   │   ├── vision_agent.py
+│   │   ├── reasoning_agent.py
+│   │   └── critic_agent.py
+│   │
+│   ├── tools
+│   │   ├── vector_search.py
+│   │   ├── document_parser.py
+│   │   ├── image_analyzer.py
+│   │   └── embedding_generator.py
+│   │
+│   ├── services
+│   │   ├── qdrant_service.py
+│   │   ├── mongodb_service.py
+│   │   ├── llm_service.py
+│   │   └── valkey_service.py
+│   │
+│   ├── workers
+│   │   └── document_worker.py
+│   │
+│   └── utils
+│       ├── config.py
+│       ├── logger.py
+│       └── helpers.py
+│
+├── frontend
+│   └── streamlit_app.py
+│
+├── docker
+│   └── llm_server
+│
+├── config
+│
+├── requirements.txt
+├── docker-compose.yml
+├── .env
+└── README.md
+
+
+
+
+Machine Learning, GIT, Agentic AI, Generative AI, Mongo DB, Qdrant, Vallkey, Redis,PostgreSQL
+
+
+
+Multimodal Agentic RAG System
+• LangGraph multi-agent orchestration
+• Multimodal retrieval (text + CLIP vision)
+• OCR support for scanned documents
+• Qdrant vector database
+• FastAPI backend
+• Streamlit interface
