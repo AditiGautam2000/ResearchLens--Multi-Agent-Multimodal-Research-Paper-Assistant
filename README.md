@@ -204,38 +204,67 @@ G --> J[Qdrant]
 H --> J
 I --> K[MongoDB]
 ```
-# Full Architecture Diagram
-```mermaid
+
 flowchart LR
 
+%% =========================
+%% DOCUMENT INGESTION
+%% =========================
+
 subgraph Document_Ingestion
+
 A[Upload PDF] --> B[PDF Processing]
+
 B --> C[Text Extraction]
 B --> D[Image Extraction]
 
+%% ---------- TEXT PIPELINE ----------
 C --> E[Chunking]
-E --> F[Text Embedding]
+E --> F[Text Embedding<br/>nomic-embed-text]
+F --> G[(Qdrant Vector DB)]
 
-D --> G[Vision Model]
-G --> H[Image Description]
+%% ---------- IMAGE PIPELINE ----------
+D --> H[Figure Detection]
+H --> I[Store Figure Metadata]
+I --> J[(MongoDB)]
 
-F --> I[(Qdrant Vector DB)]
-H --> I
+%% ---------- IMAGE FILE STORAGE ----------
+D --> K[Save Extracted Images<br/>Local Uploads Folder]
+
 end
+
+%% =========================
+%% QUERY PIPELINE
+%% =========================
 
 subgraph Query_Pipeline
-J[User Query] --> K[Query Embedding]
-K --> L[Vector Search]
-L --> M[Retriever]
 
-M --> N[LLM Reasoning]
-N --> O[Answer Generation]
+L[User Query] --> M[Router Agent]
 
-I --> L
+%% ---------- TEXT QUERY FLOW ----------
+M -->|Text Query| N[Query Embedding]
+N --> O[Semantic Vector Search]
+G --> O
+O --> P[Retriever Agent]
+
+%% ---------- FIGURE QUERY FLOW ----------
+M -->|Figure Query| Q[Figure Number Detection]
+Q --> R[MongoDB Figure Lookup]
+J --> R
+R --> S[Load Image and related query]
+K --> S
+S --> T[Vision Model<br/>Moondream]
+
+%% ---------- COMMON REASONING ----------
+P --> U[Reasoning Agent<br/>Phi3 via Ollama]
+T --> U
+
+U --> V[Critic Agent]
+V --> W[Final Answer]
+
 end
 
-O --> P[Streamlit UI]
-```
+W --> X[Streamlit UI]
 ## 🧰 Technology Stack
 
 | Component | Technology |
