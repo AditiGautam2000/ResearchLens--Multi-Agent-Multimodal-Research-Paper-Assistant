@@ -204,7 +204,7 @@ G --> J[Qdrant]
 H --> J
 I --> K[MongoDB]
 ```
-
+```mermaid
 flowchart LR
 
 %% =========================
@@ -265,6 +265,7 @@ V --> W[Final Answer]
 end
 
 W --> X[Streamlit UI]
+```
 ## 🧰 Technology Stack
 
 | Component | Technology |
