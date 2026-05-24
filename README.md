@@ -112,7 +112,7 @@ B --> C[LangGraph Multi-Agent System]
 C --> D[Retrieval Agent]
 C --> E[Vision Agent]
 C --> F[Reasoning Agent]
-C --> F[Critic Agent]
+C --> P[Critic Agent]
 
 D --> G[Qdrant Vector Database]
 E --> H[MongoDB Figure Storage]
