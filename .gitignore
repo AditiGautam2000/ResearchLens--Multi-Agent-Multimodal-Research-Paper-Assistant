@@ -6,3 +6,5 @@ __pycache__/
 *.pyd
 .ipynb_checkpoints/
 .DS_Store
+uploads/
+extracted_images/
